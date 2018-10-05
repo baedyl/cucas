@@ -142,7 +142,7 @@ CREATE TABLE `PAIEMENT` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `PERSONNEL`
+--  Structure de la table `PERSONNEL`
 --
 
 CREATE TABLE `PERSONNEL` (
