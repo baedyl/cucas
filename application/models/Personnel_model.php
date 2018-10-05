@@ -1,5 +1,5 @@
 <?php
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+if ( !defined('BASEPATH')) exit('No direct script access allowed');
 class Personnel_model extends CI_Model{
     /*
      * Get posts
@@ -47,3 +47,4 @@ class Personnel_model extends CI_Model{
         return $delete?true:false;
     }
 }
+?>
