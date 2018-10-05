@@ -8,7 +8,10 @@ class Session extends CI_Controller {
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
+
+        // Load Models
         $this->load->model('Session_model');
+        $this->load->model('Client_model');
 
         // Ion Auth
         $this->load->library('ion_auth');
@@ -83,7 +86,7 @@ class Session extends CI_Controller {
             
             //prepare post data
             $postData = array(
-                'ID_CLIENT' => $this->input->post('idClient'),
+                'ID_CLIENT' => $this->input->post('clients'),
                 'TYPE_SESSION' => $this->input->post('type'),
                 'DATE_DEBUT' => $this->input->post('debut'),
                 'DATE_CLOTURE' => $this->input->post('fin'),
@@ -110,6 +113,9 @@ class Session extends CI_Controller {
         $data['title'] = 'Ajouter session';
         //$data['action'] = 'Add';
         $data['action'] = 'Ajouter';
+
+        // List of clients to fill the combobox
+        $data['clients'] = $this->Client_model->getRows();
 
         //var_dump($postData);exit;
         
@@ -167,6 +173,9 @@ class Session extends CI_Controller {
         $data['session'] = $sessionData;
         $data['title'] = 'Modifier session';
         $data['action'] = 'Edit';
+        
+        // List of clients to fill the combobox
+        $data['clients'] = $this->Client_model->getRows();
         
         //load the edit page view
         $this->load->view('templates/header', $data);

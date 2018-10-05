@@ -30,7 +30,7 @@
                         <?php if(!empty($sessions)): foreach($sessions as $session): ?>
                         <tr>
                             <td><?php echo '#'.$session['ID_SESSION']; ?></td>
-                            <td><?php echo $session['ID_CLIENT']; ?></td>
+                            <td><a href="<?php echo site_url('client/view/'.$session['ID_CLIENT']); ?>"><?php echo $session['ID_CLIENT']; ?></a></td>
                             <td><?php echo $session['TYPE_SESSION']; ?></td>
                             <td><?php echo $session['DATE_DEBUT']; ?></td>
                             <td><?php echo $session['DATE_CLOTURE']; ?></td>

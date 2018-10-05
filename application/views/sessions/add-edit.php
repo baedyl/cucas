@@ -16,7 +16,19 @@
                     <form method="post" action="" class="form">
                         <div class="form-group">
                             <label for="idClient">Id Client</label>
-                            <input type="text" class="form-control" name="idClient" placeholder="Enter Id Client" value="<?php echo !empty($session['ID_CLIENT'])?$session['ID_CLIENT']:''; ?>">
+                            <!--input type="text" class="form-control" name="idClient" placeholder="Enter Id Client" value="<?php echo !empty($session['ID_CLIENT'])?$session['ID_CLIENT']:''; ?>"-->
+                            <select name="clients" class="form-control">
+                                <?php foreach($clients as $client): 
+                                if($session['ID_CLIENT'] == $client['ID_CLIENT']){
+                                    echo "<option selected value='".$client['ID_CLIENT']."'>".$client['NOM_CLIENT']."</option>";
+                                }
+                                else{
+                                    echo "<option value='".$client['ID_CLIENT']."'>".$client['NOM_CLIENT']."</option>";
+                                }
+                                    
+                                ?>
+                                <?php endforeach; ?>
+                            </select>
                             <?php echo form_error('idClient','<p class="help-block text-danger">','</p>'); ?>
                         </div>
                         <div class="form-group">
