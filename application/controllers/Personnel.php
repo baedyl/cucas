@@ -54,7 +54,7 @@ class Personnel extends CI_Controller {
         //check whether post id is not empty
         if(!empty($id)){
             $data['personnel'] = $this->personnel_model->getRows($id);
-            $data['title'] = $data['personnel']['nom'];
+            $data['title'] = $data['personnel']['NOM_PERSONNEL'];
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -75,13 +75,17 @@ class Personnel extends CI_Controller {
         //if add request is submitted
         if($this->input->post('postSubmit')){
             //form field validation rules
-            $this->form_validation->set_rules('nom', 'personnel nom', 'required');
-            $this->form_validation->set_rules('email', 'personnel email', 'required');
+            $this->form_validation->set_rules('nom', 'personnel NOM_PERSONNEL', 'required');
+            $this->form_validation->set_rules('email', 'personnel EMAIL', 'required');
+            $this->form_validation->set_rules('cin', 'personnel CIN_PERSONNEL', 'required');
+            $this->form_validation->set_rules('tel', 'personnel NUM_TEL', 'required');
             
             //prepare post data
             $postData = array(
-                'nom' => $this->input->post('nom'),
-                'email' => $this->input->post('email')
+                'NOM_PERSONNEL' => $this->input->post('nom'),
+                'CIN_PERSONNEL' => $this->input->post('cin'),
+                'NUM_TEL' => $this->input->post('tel'),
+                'EMAIL' => $this->input->post('email')
             );
             
             //validate submitted form data
@@ -100,7 +104,8 @@ class Personnel extends CI_Controller {
         
         $data['personnel'] = $postData;
         $data['title'] = 'Ajouter personnel';
-        $data['action'] = 'Add';
+        //$data['action'] = 'Add';
+        $data['action'] = 'Ajouter';
 
         //var_dump($postData);exit;
         
@@ -124,13 +129,17 @@ class Personnel extends CI_Controller {
         //if update request is submitted
         if($this->input->post('postSubmit')){
             //form field validation rules
-            $this->form_validation->set_rules('nom', 'personnel nom', 'required');
-            $this->form_validation->set_rules('email', 'personnel email', 'required');
+            $this->form_validation->set_rules('nom', 'personnel NOM_PERSONNEL', 'required');
+            $this->form_validation->set_rules('email', 'personnel EMAIL', 'required');
+            $this->form_validation->set_rules('cin', 'personnel CIN_PERSONNEL', 'required');
+            $this->form_validation->set_rules('tel', 'personnel NUM_TEL', 'required');
             
             //prepare cms page data
             $postData = array(
-                'nom' => $this->input->post('nom'),
-                'email' => $this->input->post('email')
+                'NOM_PERSONNEL' => $this->input->post('nom'),
+                'CIN_PERSONNEL' => $this->input->post('cin'),
+                'NUM_TEL' => $this->input->post('tel'),
+                'EMAIL' => $this->input->post('email')
             );
             
             //validate submitted form data
@@ -139,7 +148,7 @@ class Personnel extends CI_Controller {
                 $update = $this->personnel_model->update($postData, $id);
                 
                 if($update){
-                    $this->session->set_userdata('success_msg', 'Person has been modified successfully.');
+                    $this->session->set_userdata('success_msg', 'Personnel has been modified successfully.');
                     redirect('/personnel');
                 }else{
                     $data['error_msg'] = 'Some problems occurred, please try again.';
@@ -149,7 +158,7 @@ class Personnel extends CI_Controller {
         
         
         $data['personnel'] = $personnelData;
-        $data['title'] = 'Update personnel';
+        $data['title'] = 'Modifier personnel';
         $data['action'] = 'Edit';
         
         //load the edit page view

@@ -15,15 +15,26 @@
                 <div class="panel-body">
                     <form method="post" action="" class="form">
                         <div class="form-group">
-                            <label for="nom">Nom</label>
-                            <input type="text" class="form-control" name="nom" placeholder="Enter nom" value="<?php echo !empty($personnel['nom'])?$personnel['nom']:''; ?>">
-                            <?php echo form_error('Nom','<p class="help-block text-danger">','</p>'); ?>
+                            <label for="nom">Nom Personnel</label>
+                            <input type="text" class="form-control" name="nom" placeholder="Enter nom" value="<?php echo !empty($personnel['NOM_PERSONNEL'])?$personnel['NOM_PERSONNEL']:''; ?>">
+                            <?php echo form_error('nom','<p class="help-block text-danger">','</p>'); ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="cin">CIN Personnel</label>
+                            <input type="text" class="form-control" name="cin" placeholder="Enter CIN" value="<?php echo !empty($personnel['CIN_PERSONNEL'])?$personnel['CIN_PERSONNEL']:''; ?>">
+                            <?php echo form_error('nom','<p class="help-block text-danger">','</p>'); ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">Telephone</label>
+                            <input type="text" class="form-control" name="tel" placeholder="Enter tel" value="<?php echo !empty($personnel['NUM_TEL'])?$personnel['NUM_TEL']:''; ?>">
+                            <?php echo form_error('nom','<p class="help-block text-danger">','</p>'); ?>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <textarea name="email" class="form-control" placeholder="Enter Email"><?php echo !empty($personnel['email'])?$personnel['email']:''; ?></textarea>
-                            <?php echo form_error('Prix','<p class="text-danger">','</p>'); ?>
+                            <textarea name="email" class="form-control" placeholder="Enter Email"><?php echo !empty($personnel['EMAIL'])?$personnel['EMAIL']:''; ?></textarea>
+                            <?php echo form_error('email','<p class="text-danger">','</p>'); ?>
                         </div>
+
                         <input type="submit" name="postSubmit" class="btn btn-primary" value="Submit"/>
                     </form>
                 </div>

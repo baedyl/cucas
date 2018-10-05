@@ -16,21 +16,25 @@
                     <thead>
                         <tr>
                             <th width="5%">ID</th>
-                            <th width="30%">Nom Complet</th>
-                            <th width="50%">Email</th>
+                            <th width="20%">Nom Complet</th>
+                            <th width="15%">CIN</th>
+                            <th width="15%">Tel</th>
+                            <th width="30%">Email</th>
                             <th width="15%">Action</th>
                         </tr>
                     </thead>
                     <tbody id="userData">
                         <?php if(!empty($personnel)): foreach($personnel as $personne): ?>
                         <tr>
-                            <td><?php echo '#'.$personne['id']; ?></td>
-                            <td><?php echo $personne['nom']; ?></td>
-                            <td><?php echo $personne['email']; ?></td>
+                            <td><?php echo '#'.$personne['ID_PERSONNEL']; ?></td>
+                            <td><?php echo $personne['NOM_PERSONNEL']; ?></td>
+                            <td><?php echo $personne['CIN_PERSONNEL']; ?></td>
+                            <td><?php echo $personne['NUM_TEL']; ?></td>
+                            <td><?php echo $personne['EMAIL']; ?></td>
                             <td>
-                                <a href="<?php echo site_url('personnel/view/'.$personne['id']); ?>" class="glyphicon glyphicon-eye-open"></a>
-                                <a href="<?php echo site_url('personnel/edit/'.$personne['id']); ?>" class="glyphicon glyphicon-edit"></a>
-                                <a href="<?php echo site_url('personnel/delete/'.$personne['id']); ?>" class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete?')"></a>
+                                <a href="<?php echo site_url('personnel/view/'.$personne['ID_PERSONNEL']); ?>" class="glyphicon glyphicon-eye-open"></a>
+                                <a href="<?php echo site_url('personnel/edit/'.$personne['ID_PERSONNEL']); ?>" class="glyphicon glyphicon-edit"></a>
+                                <a href="<?php echo site_url('personnel/delete/'.$personne['ID_PERSONNEL']); ?>" class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete?')"></a>
                             </td>
                         </tr>
                         <?php endforeach; else: ?>

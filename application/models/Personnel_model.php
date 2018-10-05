@@ -6,11 +6,11 @@ class Personnel_model extends CI_Model{
      */
     function getRows($id = ""){
         if(!empty($id)){
-            $query = $this->db->get_where('Personnel', array('id' => $id));
+            $query = $this->db->get_where('PERSONNEL', array('ID_PERSONNEL' => $id));
             //var_dump($query);exit;
 			return $query->row_array();
         }else{
-            $query = $this->db->get('Personnel');
+            $query = $this->db->get('PERSONNEL');
             return $query->result_array();
         }
     }
@@ -19,7 +19,7 @@ class Personnel_model extends CI_Model{
      * Insert post
      */
     public function insert($data = array()) {
-        $insert = $this->db->insert('Personnel', $data);
+        $insert = $this->db->insert('PERSONNEL', $data);
         if($insert){
             return $this->db->insert_id();
         }else{
@@ -32,7 +32,7 @@ class Personnel_model extends CI_Model{
      */
     public function update($data, $id) {
         if(!empty($data) && !empty($id)){
-            $update = $this->db->update('Personnel', $data, array('id'=>$id));
+            $update = $this->db->update('PERSONNEL', $data, array('ID_PERSONNEL'=>$id));
             return $update?true:false;
         }else{
             return false;
@@ -43,7 +43,7 @@ class Personnel_model extends CI_Model{
      * Delete post
      */
     public function delete($id){
-        $delete = $this->db->delete('Personnel',array('id'=>$id));
+        $delete = $this->db->delete('PERSONNEL',array('ID_PERSONNEL'=>$id));
         return $delete?true:false;
     }
 }
