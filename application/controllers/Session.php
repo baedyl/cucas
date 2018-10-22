@@ -146,7 +146,7 @@ class Session extends CI_Controller {
             
             //prepare cms page data
             $postData = array(
-                'ID_CLIENT' => $this->input->post('idClient'),
+                'ID_CLIENT' => $this->input->post('clients'),
                 'TYPE_SESSION' => $this->input->post('type'),
                 'DATE_DEBUT' => $this->input->post('debut'),
                 'DATE_CLOTURE' => $this->input->post('fin'),

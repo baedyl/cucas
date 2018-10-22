@@ -17,10 +17,15 @@
     </head>
     <body>
         <div id="navbar">
-            <a class="active" href="<?php echo site_url('welcome'); ?>">Acceuill</a>
+            <a class="active" href="<?php echo site_url('welcome'); ?>">Acceuil</a>
             <a href="<?php echo site_url('client'); ?>" >Clients</a>
             <a href="<?php echo site_url('personnel'); ?>" >Personnel</a>
             <a href="<?php echo site_url('session'); ?>" >Sessions</a>
+            <a href="<?php echo site_url('traduction'); ?>" >Traductions</a>
+            <a href="<?php echo site_url('dossier'); ?>" >Dossiers</a>
+            <a href="<?php echo site_url('paiement'); ?>" >Paiements</a>
+            <a href="<?php echo site_url('visa'); ?>" >Visas</a>
+            <a href="<?php echo site_url('affectation'); ?>" >Affectations</a>
             <a href="<?php echo site_url('auth'); ?>" >Users</a>
             <a class="droite" href="<?php echo site_url('auth/logout'); ?>">Logout</a>
         </div>

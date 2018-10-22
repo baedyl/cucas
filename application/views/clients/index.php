@@ -30,7 +30,7 @@ onclick="javascript:opencart()" >
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="gallery"> 
                             <div class="card h-100"> 
-                                <a href="<?php echo site_url('client/view/'.$client['ID_CLIENT']); ?>"><img class="card-img-top" src="<?php echo base_url($dir)."/".$client['IMAGE'];?>" alt="<?php $client['NOM_CLIENT'] ?>"></a>
+                                <a href="<?php echo site_url('client/view/'.$client['ID_CLIENT']); ?>"><img src="<?php echo base_url($dir)."/".$client['IMAGE'];?>" alt="<?php $client['NOM_CLIENT'] ?>"></a>
                                 <div class="card-body">
                                     <h4 class="card-title">
                                         <a href="#"><?php echo $client['NOM_CLIENT']; ?></a>

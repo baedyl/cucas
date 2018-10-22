@@ -72,13 +72,19 @@ class Auth extends CI_Controller
 			// check to see if the user is logging in
 			// check for "remember me"
 			$remember = (bool)$this->input->post('remember');
+			$user = $this->input->post('identity');
 
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
 			{
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				if($user == "admin@admin.com"){
+					redirect('/Admin', 'refresh');
+				}else{
+					redirect('/', 'refresh');
+				}
+				
 			}
 			else
 			{
