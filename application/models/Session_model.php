@@ -14,6 +14,16 @@ class Session_model extends CI_Model{
             return $query->result_array();
         }
     }
+
+    /*
+     * Get sessions by Client ID
+     */
+    function getRowsByClient($id){
+        if(!empty($id)){
+            $query = $this->db->get_where('SESSION', array('ID_CLIENT' => $id));
+			return $query->result_array();
+        }
+    }
     
     /*
      * Insert Session

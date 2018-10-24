@@ -27,7 +27,10 @@
                         </tr>
                     </thead>
                     <tbody id="userData">
-                        <?php if(!empty($visas)): foreach($visas as $visa): ?>
+                        <?php 
+                            //var_dump($visas);exit;
+                            if(!empty($visas)): foreach($visas as $visa): 
+                        ?>
                         <tr>
                             <td><?php echo '#'.$visa['ID_VISA']; ?></td>
                             <td><a href="<?php echo site_url('session/view/'.$visa['ID_SESSION']); ?>"><?php echo $visa['ID_SESSION']; ?></a></td>

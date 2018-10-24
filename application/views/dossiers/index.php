@@ -29,7 +29,7 @@
                         <?php if(!empty($dossiers)): foreach($dossiers as $dossier): ?>
                         <tr>
                             <td><?php echo '#'.$dossier['ID_DOSSIER']; ?></td>
-                            <td><a href="<?php echo site_url('session/view/'.$dossier['ID_SESSION']); ?>"><?php echo $dossier['ID_DOSSIER']; ?></a></td>
+                            <td><a href="<?php echo site_url('session/view/'.$dossier['ID_SESSION']); ?>"><?php echo $dossier['ID_SESSION']; ?></a></td>
                             <td>
                                 <?php
                                      if($dossier['CONTRAT']==1){

@@ -2,13 +2,27 @@
 if ( !defined('BASEPATH')) exit('No direct script access allowed');
 class Dossier_model extends CI_Model{
     /*
-     * Get sessions
+     * Get dossiers
      */
     function getRows($id = ""){
         if(!empty($id)){
             $query = $this->db->get_where('DOSSIER', array('ID_DOSSIER' => $id));
             //var_dump($query);exit;
 			return $query->row_array();
+        }else{
+            $query = $this->db->get('DOSSIER');
+            return $query->result_array();
+        }
+    }
+
+    /*
+     * Get dossiers by session's ID
+     */
+    function getRowsBySession($id = ""){
+        if(!empty($id)){
+            $query = $this->db->get_where('DOSSIER', array('ID_SESSION' => $id));
+            //var_dump($query);exit;
+			return $query->result_array();
         }else{
             $query = $this->db->get('DOSSIER');
             return $query->result_array();

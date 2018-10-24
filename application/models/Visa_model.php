@@ -20,6 +20,18 @@ class Visa_model extends CI_Model{
         }
     }
 
+    // Get Visa by Id Session
+    function getRowsBySession($id){
+        if(!empty($id)){
+            $query = $this->db->get_where('VISA', array('ID_SESSION' => $id));
+            //var_dump($query->result_array());exit;
+			return $query->result_array();
+        }else{
+            $query = $this->db->get('VISA');
+            return $query->result_array();
+        }
+    }
+
     /*
      * Insert visa
      */

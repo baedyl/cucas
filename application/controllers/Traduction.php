@@ -17,8 +17,8 @@ class Traduction extends CI_Controller {
         $this->load->library('ion_auth');
     }
 
-    // Liste de toutes les sessions
-    public function index(){
+    // Liste de toutes les traductions
+    public function index($id = NULL){
         // Verify if the user is logged in
         if($this->ion_auth->logged_in()){
             $data = array();
@@ -32,11 +32,14 @@ class Traduction extends CI_Controller {
                 $data['error_msg'] = $this->session->userdata('error_msg');
                 $this->session->unset_userdata('error_msg');
             }
-            
-            $data['traductions'] = $this->Traduction_model->getRows();
-            $data['title'] = 'Liste des traductions';
-            
-            //var_dump($data['personnel']);exit;
+
+            if(empty($id)){
+                $data['traductions'] = $this->Traduction_model->getRows();
+                $data['title'] = 'Liste des traductions';
+            }else{  // If a Client ID is provided only return the lines matching that value
+                $data['traductions'] = $this->Traduction_model->getRowsByClient($id);
+                $data['title'] = 'Liste des traductions du client x';
+            }
 
             //load the list page view
             $this->load->view('templates/header', $data);

@@ -4,6 +4,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">Details Client<a href="<?php echo site_url('client/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
             <div class="panel-body">
+                <div>
+                    <a href="<?php echo site_url('session/index/'.$client['ID_CLIENT']); ?>" class="" >Session</a>
+                    <a href="<?php echo site_url('traduction/index/'.$client['ID_CLIENT']); ?>" class="" >Traduction</a>
+                </div>
                 <div class="form-group">
                     <label>Nom Client:</label>
                     <p><?php echo !empty($client['NOM_CLIENT'])?$client['NOM_CLIENT']:''; ?></p>

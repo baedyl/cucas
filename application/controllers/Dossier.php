@@ -18,7 +18,7 @@ class Dossier extends CI_Controller {
     }
 
     // Liste de toutes les sessions
-    public function index(){
+    public function index($id = NULL){
         // Verify if the user is logged in
         if($this->ion_auth->logged_in()){
             $data = array();
@@ -32,10 +32,14 @@ class Dossier extends CI_Controller {
                 $data['error_msg'] = $this->session->userdata('error_msg');
                 $this->session->unset_userdata('error_msg');
             }
-            
-            $data['dossiers'] = $this->Dossier_model->getRows();
-            $data['title'] = 'Liste des dossiers';
-            
+            if(empty($id)){
+                $data['dossiers'] = $this->Dossier_model->getRows();
+                $data['title'] = 'Liste des dossiers';
+            }else{
+                $data['dossiers'] = $this->Dossier_model->getRowsBySession($id);
+                $data['title'] = 'Liste des dossiers de la session';
+
+            }  
             //var_dump($data['personnel']);exit;
 
             //load the list page view

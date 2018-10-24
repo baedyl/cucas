@@ -2,7 +2,7 @@
 if ( !defined('BASEPATH')) exit('No direct script access allowed');
 class Traduction_model extends CI_Model{
     /*
-     * Get sessions
+     * Get Traductions
      */
     function getRows($id = ""){
         if(!empty($id)){
@@ -12,6 +12,16 @@ class Traduction_model extends CI_Model{
         }else{
             $query = $this->db->get('TRADUCTION');
             return $query->result_array();
+        }
+    }
+
+    /*
+     * Get Traductions Where ID_CLIENT == $id
+     */
+    function getRowsByClient($id){
+        if(!empty($id)){
+            $query = $this->db->get_where('TRADUCTION', array('ID_CLIENT' => $id));
+			return $query->result_array();
         }
     }
     

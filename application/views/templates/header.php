@@ -27,6 +27,7 @@
             <a href="<?php echo site_url('visa'); ?>" >Visas</a>
             <a href="<?php echo site_url('affectation'); ?>" >Affectations</a>
             <a href="<?php echo site_url('auth'); ?>" >Users</a>
+            <a href="<?php echo site_url('validation'); ?>" >Validations</a>
             <a class="droite" href="<?php echo site_url('auth/logout'); ?>">Logout</a>
         </div>
         <script>

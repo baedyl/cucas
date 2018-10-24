@@ -10,40 +10,42 @@ class Visa extends CI_Controller{
 
         $this->load->model('Visa_model');
         $this->load->model('Session_model');
-        //$this->load->helper('url_helper');
+        $this->load->helper('url_helper');
 
         // Ion Auth
         $this->load->library('ion_auth');
 
     }
 
-    public function index(){
-        /* get messages from the session
-           Not sure this bloc is any useful...
-        */
-        if($this->ion_auth->logged_in()){
-            if($this->session->userdata('success_msg')){
-                $data['success_msg'] = $this->session->userdata('success_msg');
-                $this->session->unset_userdata('success_msg');
+    public function index($id = NULL){    
+            if($this->ion_auth->logged_in()){
+                if($this->session->userdata('success_msg')){
+                    $data['success_msg'] = $this->session->userdata('success_msg');
+                    $this->session->unset_userdata('success_msg');
+                }
+                if($this->session->userdata('error_msg')){
+                    $data['error_msg'] = $this->session->userdata('error_msg');
+                    $this->session->unset_userdata('error_msg');
+                }
+                
+                if(empty($id)){
+    
+                    $data['visas'] = $this->Visa_model->getRows();
+                    $data['title'] = 'Liste des Visas';
+                }else{  // If a Client ID is provided only return the lines matching that value
+                    $data['visas'] = $this->Visa_model->getRowsBySession($id);
+                    //var_dump($data['visas']);exit;
+                    $data['title'] = 'Liste des Visas de la Session x';
+                }
+                 //load the list page view
+                 $this->load->view('templates/header', $data);
+                 $this->load->view('visas/index', $data);
+                 $this->load->view('templates/footer');
             }
-            if($this->session->userdata('error_msg')){
-                $data['error_msg'] = $this->session->userdata('error_msg');
-                $this->session->unset_userdata('error_msg');
-            }
-
-            $data['visas'] = $this->Visa_model->getRows();
-            $data['title'] = 'Liste des Visas';
-
-            //load the list page view
-            $this->load->view('templates/header', $data);
-            $this->load->view('visas/index', $data);
-            $this->load->view('templates/footer');
-        }
-        else{
-            // redirect them to the login page
-            redirect('auth/', 'refresh');
-        }
-        
+            else{
+                // redirect them to the login page
+                redirect('auth/', 'refresh');
+            } 
     }
 
     public function view($id = NULL){
