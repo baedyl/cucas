@@ -28,14 +28,15 @@ class Visa extends CI_Controller{
                     $this->session->unset_userdata('error_msg');
                 }
                 
+                $data['title'] = 'Visas';
                 if(empty($id)){
     
                     $data['visas'] = $this->Visa_model->getRows();
-                    $data['title'] = 'Liste des Visas';
+                    
                 }else{  // If a Client ID is provided only return the lines matching that value
                     $data['visas'] = $this->Visa_model->getRowsBySession($id);
                     //var_dump($data['visas']);exit;
-                    $data['title'] = 'Liste des Visas de la Session x';
+                    //$data['title'] = 'Liste des Visas de la Session x';
                 }
                  //load the list page view
                  $this->load->view('templates/header', $data);
@@ -59,7 +60,7 @@ class Visa extends CI_Controller{
         // 
         if(!empty($id)){
             $data['visa'] = $this->Visa_model->getRows($id);
-            $data['title'] = $data['visa']['PAYS'];
+            $data['title'] = 'Visas';//$data['title'] = $data['visa']['PAYS'];
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -115,7 +116,7 @@ class Visa extends CI_Controller{
         }
         
         $data['visa'] = $postData;
-        $data['title'] = 'Add Visa';
+        $data['title'] = 'Visas';//$data['title'] = 'Add Visa';
         $data['action'] = 'Add';
 
         // List of sessions to fill the combobox
@@ -147,14 +148,7 @@ class Visa extends CI_Controller{
             $this->form_validation->set_rules('pays', 'visa PAYS', 'required');
             
             
-            /* If no image is uploaded keep the old image name
-            if(empty($file_name)){
-                $file_name = $this->input->post('oldimg');
-            }*/
-
-            //$file_name = !empty($file_name)?$file_name:$this->input->post('oldimg');
             
-           
             //prepare cms page data
             $visaData = array(
                 'ID_SESSION' => $this->input->post('idSession'),
@@ -184,7 +178,7 @@ class Visa extends CI_Controller{
         
         
         $data['visa'] = $visaData;
-        $data['title'] = 'Update Visa';
+        $data['title'] = 'Visas';//$data['title'] = 'Update Visa';
         $data['action'] = 'Edit';
 
         // List of sessions to fill the combobox

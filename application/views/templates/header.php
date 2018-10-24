@@ -17,14 +17,14 @@
     </head>
     <body>
         <div id="navbar">
-            <a class="active" href="<?php echo site_url('welcome'); ?>">Acceuil</a>
-            <a href="<?php echo site_url('client'); ?>" >Clients</a>
-            <a href="<?php echo site_url('personnel'); ?>" >Personnel</a>
-            <a href="<?php echo site_url('session'); ?>" >Sessions</a>
-            <a href="<?php echo site_url('traduction'); ?>" >Traductions</a>
-            <a href="<?php echo site_url('dossier'); ?>" >Dossiers</a>
-            <a href="<?php echo site_url('paiement'); ?>" >Paiements</a>
-            <a href="<?php echo site_url('visa'); ?>" >Visas</a>
+            <a href="<?php echo site_url('welcome'); ?>">Acceuil</a>
+            <a class="<?php if("Clients" == $title) echo "active"; ?>" href="<?php echo site_url('client'); ?>" >Clients</a>
+            <a class="<?php if("Personnel" == $title) echo "active"; ?>" href="<?php echo site_url('personnel'); ?>" >Personnel</a>
+            <a class="<?php if("Sessions" == $title) echo "active"; ?>" href="<?php echo site_url('session'); ?>" >Sessions</a>
+            <a class="<?php if("Traductions" == $title) echo "active"; ?>" href="<?php echo site_url('traduction'); ?>" >Traductions</a>
+            <a class="<?php if("Dossiers" == $title) echo "active"; ?>" href="<?php echo site_url('dossier'); ?>" >Dossiers</a>
+            <a class="<?php if("Paiements" == $title) echo "active"; ?>" href="<?php echo site_url('paiement'); ?>" >Paiements</a>
+            <a class="<?php if("Visas" == $title) echo "active"; ?>" href="<?php echo site_url('visa'); ?>" >Visas</a>
             <a href="<?php echo site_url('affectation'); ?>" >Affectations</a>
             <a href="<?php echo site_url('auth'); ?>" >Users</a>
             <a href="<?php echo site_url('validation'); ?>" >Validations</a>

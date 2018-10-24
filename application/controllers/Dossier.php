@@ -32,12 +32,14 @@ class Dossier extends CI_Controller {
                 $data['error_msg'] = $this->session->userdata('error_msg');
                 $this->session->unset_userdata('error_msg');
             }
+
+            $data['title'] = 'Dossiers';
             if(empty($id)){
                 $data['dossiers'] = $this->Dossier_model->getRows();
-                $data['title'] = 'Liste des dossiers';
+                
             }else{
                 $data['dossiers'] = $this->Dossier_model->getRowsBySession($id);
-                $data['title'] = 'Liste des dossiers de la session';
+                //$data['title'] = 'Liste des dossiers de la session';
 
             }  
             //var_dump($data['personnel']);exit;
@@ -62,7 +64,7 @@ class Dossier extends CI_Controller {
         //check whether post id is not empty
         if(!empty($id)){
             $data['dossier'] = $this->Dossier_model->getRows($id);
-            $data['title'] = $data['dossier']['CONTRAT'];
+            $data['title'] = 'Dossiers';//$data['title'] = $data['dossier']['CONTRAT'];
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -135,7 +137,7 @@ class Dossier extends CI_Controller {
         }
         
         $data['dossier'] = $postData;
-        $data['title'] = 'Ajouter dossier';
+        $data['title'] = 'Dossiers';//$data['title'] = 'Ajouter dossier';
         //$data['action'] = 'Add';
         $data['action'] = 'Ajouter';
 
@@ -214,7 +216,7 @@ class Dossier extends CI_Controller {
         
         
         $data['dossier'] = $dossierData;
-        $data['title'] = 'Modifier dossier';
+        $data['title'] = 'Dossiers';//$data['title'] = 'Modifier dossier';
         $data['action'] = 'Edit';
         
         // List of clients to fill the combobox

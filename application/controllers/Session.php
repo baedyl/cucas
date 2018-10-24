@@ -36,7 +36,7 @@ class Session extends CI_Controller {
             if(empty($id)){
     
                 $data['sessions'] = $this->Session_model->getRows();
-                $data['title'] = 'Liste des sessions';
+                $data['title'] = 'Sessions';
             }else{  // If a Client ID is provided only return the lines matching that value
                 $data['sessions'] = $this->Session_model->getRowsByClient($id);
                 $data['title'] = 'Liste des sessions du client x';
@@ -62,7 +62,7 @@ class Session extends CI_Controller {
         //check whether post id is not empty
         if(!empty($id)){
             $data['session'] = $this->Session_model->getRows($id);
-            $data['title'] = $data['session']['TYPE_SESSION'];
+            $data['title'] = 'Sessions';//$data['title'] = $data['session']['TYPE_SESSION'];
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -114,7 +114,7 @@ class Session extends CI_Controller {
         }
         
         $data['session'] = $postData;
-        $data['title'] = 'Ajouter session';
+        $data['title'] = 'Sessions';//$data['title'] = 'Ajouter session';
         //$data['action'] = 'Add';
         $data['action'] = 'Ajouter';
 
@@ -175,7 +175,7 @@ class Session extends CI_Controller {
         
         
         $data['session'] = $sessionData;
-        $data['title'] = 'Modifier session';
+        $data['title'] = 'Sessions';//$data['title'] = 'Modifier session';
         $data['action'] = 'Edit';
         
         // List of clients to fill the combobox

@@ -30,7 +30,7 @@ class Client extends CI_Controller{
             }
 
             $data['clients'] = $this->Client_model->getRows();
-            $data['title'] = 'Liste des Clients';
+            $data['title'] = 'Clients';
 
             //load the list page view
             $this->load->view('templates/header', $data);
@@ -55,7 +55,7 @@ class Client extends CI_Controller{
         // verify if the product( produit ) id is not empty
         if(!empty($id)){
             $data['client'] = $this->Client_model->getRows($id);
-            $data['title'] = $data['client']['NOM_CLIENT'];
+            $data['title'] = 'Clients';//$data['title'] = $data['client']['NOM_CLIENT'];
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -111,7 +111,7 @@ class Client extends CI_Controller{
         }
         
         $data['client'] = $postData;
-        $data['title'] = 'Add Client';
+        $data['title'] = 'Clients';//$data['title'] = 'Add Client';
         $data['action'] = 'Add';
         
         //load the add page view
@@ -176,7 +176,7 @@ class Client extends CI_Controller{
         
         
         $data['client'] = $clientData;
-        $data['title'] = 'Update Client';
+        $data['title'] = 'Clients';//$data['title'] = 'Update Client';
         $data['action'] = 'Edit';
         
         //load the edit page view

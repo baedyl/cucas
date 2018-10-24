@@ -30,7 +30,7 @@ class Personnel extends CI_Controller {
             }
             
             $data['personnel'] = $this->personnel_model->getRows();
-            $data['title'] = 'Liste du personnel';
+            $data['title'] = 'Personnel';
             
             //var_dump($data['personnel']);exit;
 
@@ -54,7 +54,8 @@ class Personnel extends CI_Controller {
         //check whether post id is not empty
         if(!empty($id)){
             $data['personnel'] = $this->personnel_model->getRows($id);
-            $data['title'] = $data['personnel']['NOM_PERSONNEL'];
+            //$data['title'] = $data['personnel']['NOM_PERSONNEL'];
+            $data['title'] = 'Personnel';
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -103,7 +104,8 @@ class Personnel extends CI_Controller {
         }
         
         $data['personnel'] = $postData;
-        $data['title'] = 'Ajouter personnel';
+        //$data['title'] = 'Ajouter personnel';
+        $data['title'] = 'Personnel';
         //$data['action'] = 'Add';
         $data['action'] = 'Ajouter';
 
@@ -158,7 +160,8 @@ class Personnel extends CI_Controller {
         
         
         $data['personnel'] = $personnelData;
-        $data['title'] = 'Modifier personnel';
+        //$data['title'] = 'Modifier personnel';
+        $data['title'] = 'Personnel';
         $data['action'] = 'Edit';
         
         //load the edit page view

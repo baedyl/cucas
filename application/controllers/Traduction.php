@@ -33,12 +33,13 @@ class Traduction extends CI_Controller {
                 $this->session->unset_userdata('error_msg');
             }
 
+            $data['title'] = 'Traductions';
             if(empty($id)){
                 $data['traductions'] = $this->Traduction_model->getRows();
-                $data['title'] = 'Liste des traductions';
+                
             }else{  // If a Client ID is provided only return the lines matching that value
                 $data['traductions'] = $this->Traduction_model->getRowsByClient($id);
-                $data['title'] = 'Liste des traductions du client x';
+                //$data['title'] = 'Liste des traductions du client x';
             }
 
             //load the list page view
@@ -61,7 +62,7 @@ class Traduction extends CI_Controller {
         //check whether post id is not empty
         if(!empty($id)){
             $data['traduction'] = $this->Traduction_model->getRows($id);
-            $data['title'] = $data['traduction']['TYPE_MANUS'];
+            $data['title'] = 'Traductions';//$data['title'] = $data['traduction']['TYPE_MANUS'];
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -113,7 +114,7 @@ class Traduction extends CI_Controller {
         }
         
         $data['traduction'] = $postData;
-        $data['title'] = 'Ajouter traduction';
+        $data['title'] = 'Traductions';//$data['title'] = 'Ajouter traduction';
         //$data['action'] = 'Add';
         $data['action'] = 'Ajouter';
 
@@ -172,7 +173,7 @@ class Traduction extends CI_Controller {
         
         
         $data['traduction'] = $traductionData;
-        $data['title'] = 'Modifier traduction';
+        $data['title'] = 'Traductions';//$data['title'] = 'Modifier traduction';
         $data['action'] = 'Edit';
         
         // List of clients to fill the combobox

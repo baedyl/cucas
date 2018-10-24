@@ -34,7 +34,7 @@ class Paiement extends CI_Controller {
             }
             
             $data['paiements'] = $this->Paiement_model->getRows();
-            $data['title'] = 'Liste des paiements';
+            $data['title'] = 'Paiements';
             
             //var_dump($data['personnel']);exit;
 
@@ -58,7 +58,7 @@ class Paiement extends CI_Controller {
         //check whether post id is not empty
         if(!empty($id)){
             $data['paiement'] = $this->Paiement_model->getRows($id);
-            $data['title'] = $data['paiement']['MONTANT_PAIEM'];
+            $data['title'] = 'Paiements';//$data['title'] = $data['paiement']['MONTANT_PAIEM'];
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -113,7 +113,7 @@ class Paiement extends CI_Controller {
         }
         
         $data['paiement'] = $postData;
-        $data['title'] = 'Ajouter paiement';
+        $data['title'] = 'Paiements';//$data['title'] = 'Ajouter paiement';
         //$data['action'] = 'Add';
         $data['action'] = 'Ajouter';
 
@@ -177,7 +177,7 @@ class Paiement extends CI_Controller {
         
         
         $data['paiement'] = $paiementData;
-        $data['title'] = 'Modifier paiement';
+        $data['title'] = 'Paiements';//$data['title'] = 'Modifier paiement';
         $data['action'] = 'Edit';
         
         // List of clients to fill the combobox
