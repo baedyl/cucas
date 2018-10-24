@@ -1,10 +1,41 @@
-<div class="container">
+<style>
+    .sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 100;
+    background-color: #333;
+    overflow-x: hidden;
+    padding-top: 20px;
+    
+    }
 
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+    }
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+
+</style>
+<div class="container">
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">Details Client<a href="<?php echo site_url('client/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
             <div class="panel-body">
-                <div>
+                <div class="sidenav">
                     <a href="<?php echo site_url('session/index/'.$client['ID_CLIENT']); ?>" class="" >Session</a>
                     <a href="<?php echo site_url('traduction/index/'.$client['ID_CLIENT']); ?>" class="" >Traduction</a>
                 </div>
