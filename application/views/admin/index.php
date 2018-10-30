@@ -229,12 +229,12 @@
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-comments"></i>
+                <i class="fa fa-fw fa-unlock-alt"></i>
               </div>
-              <div class="mr-5">26 New Messages!</div>
+              <div class="mr-5"><?php echo $validations; ?> validation(s) aujourd'hui!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
+            <a class="card-footer text-white clearfix small z-1" href="/validation">
+              <span class="float-left">Voir Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
@@ -247,10 +247,10 @@
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-list"></i>
               </div>
-              <div class="mr-5">11 New Tasks!</div>
+              <div class="mr-5"><?php echo $affectations; ?> affectations(s) aujourd'hui!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
+            <a class="card-footer text-white clearfix small z-1" href="/affectation">
+              <span class="float-left">Voir Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
@@ -261,12 +261,12 @@
           <div class="card text-white bg-success o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-shopping-cart"></i>
+                <i class="fa fa-fw fa-user-plus"></i>
               </div>
-              <div class="mr-5">123 New Orders!</div>
+              <div class="mr-5"><?php echo '$'; ?> Session(s) aujourd'hui!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
+            <a class="card-footer text-white clearfix small z-1" href="/session">
+              <span class="float-left">Voir Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
@@ -277,12 +277,12 @@
           <div class="card text-white bg-danger o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-support"></i>
+                <i class="fa fa-fw fa-check-circle-o"></i>
               </div>
-              <div class="mr-5">13 New Tickets!</div>
+              <div class="mr-5"><?php echo $visas; ?> Visa(s) aujourd'hui!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
+            <a class="card-footer text-white clearfix small z-1" href="/visa">
+              <span class="float-left">Voir Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
@@ -293,11 +293,11 @@
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Area Chart Example</div>
+          <i class="fa fa-area-chart"></i> Evolution des inscriptions</div>
         <div class="card-body">
           <canvas id="myAreaChart" width="100%" height="30"></canvas>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <div class="card-footer small text-muted">Updated the <?php echo date('d/m/Y'); ?> at <?php echo date("h:i:s A"); ?></div>
       </div>
       
     <footer class="sticky-footer">

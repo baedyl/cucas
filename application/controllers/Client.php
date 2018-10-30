@@ -7,7 +7,10 @@ class Client extends CI_Controller{
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
+
         $this->load->model('Client_model');
+        $this->load->model('Validation_model');
+
         //$this->load->helper('url_helper');
 
         // Ion Auth
@@ -72,6 +75,7 @@ class Client extends CI_Controller{
     public function add(){
         $data = array();
         $postData = array();
+        $valData = array();
         
         //if add request is submitted
         if($this->input->post('postSubmit')){
@@ -93,14 +97,34 @@ class Client extends CI_Controller{
                 //'Image' => $this->input->post('Image')
                 'IMAGE' => $file_name
             );
+
   
             //validate submitted form data
             if($this->form_validation->run() == true ){         
                 //insert post data
                 $insert = $this->Client_model->insert($postData);
+                //
+
+                
                 
                 if($insert){
                     $this->session->set_userdata('success_msg', 'Client has been added successfully.');
+
+
+                    // prepare validation data
+                    $valData = array(
+                        'ID_CLIENT' => $insert,
+                        'ID_PERSONNEL' => $this->session->user_id,
+                        'MESSAGE' => "Nouveau client ajoute",
+                        'DATE' => date('Y-m-d'),
+                        'VALIDE' => 0
+                    );
+                    // Insert in the validation table
+                    $validation = $this->Validation_model->insert($valData);
+                    //var_dump($insert);exit;
+                    if(!$validation){
+                        $data['error_msg'] = 'Operation non enregistree pour validation!'; 
+                    }
                     redirect('/client');
                 }else{
                     $data['error_msg'] = 'Some problems occurred, please try again.';

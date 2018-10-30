@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
 
         // Load Models
-        //$this->load->model('Dossier_model');
+        $this->load->model('Admin_model');
         //$this->load->model('Session_model');
 
         // Ion Auth
@@ -35,6 +35,10 @@ class Admin extends CI_Controller {
             
            
             $data['title'] = 'Tableau de bord Admin';
+            $data['validations'] = $this->Admin_model->getValidations();
+            $data['affectations'] = $this->Admin_model->getAffectations();
+           // $data['sessions'] = $this->Admin_model->getSessions();
+            $data['visas'] = $this->Admin_model->getVisas();
             
             //var_dump($data['personnel']);exit;
 

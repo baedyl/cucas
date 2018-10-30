@@ -1,23 +1,3 @@
-Affectation.php
-
-Type
-PHP
-Size
-7 KB (7,213 bytes)
-Storage used
-0 bytesOwned by undefined
-Location
-controllers
-Owner
-Salah Falaki
-Modified
-Oct 20, 2018 by Salah Falaki
-Opened
-10:52 AM by me
-Created
-Oct 20, 2018
-Add a description
-Viewers can download
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -31,6 +11,7 @@ class Affectation extends CI_Controller {
         $this->load->model('Affectation_model');
         $this->load->model('Session_model');
         $this->load->model('Personnel_model');
+        $this->load->model('Validation_model');
 
         // Ion Auth
         $this->load->library('ion_auth');
@@ -94,6 +75,7 @@ class Affectation extends CI_Controller {
     public function add(){
         $data = array();
         $postData = array();
+        $valDate = array();
         
         //if add request is submitted
         if($this->input->post('postSubmit')){
@@ -115,9 +97,26 @@ class Affectation extends CI_Controller {
             if($this->form_validation->run() == true){
                 //insert post data
                 $insert = $this->Affectation_model->insert($postData);
-                
-                if($insert){
+                //var_dump($insert);exit;
+               
+                if($insert >= 0){    // For tests purposes only
                     $this->session->set_userdata('success_msg', 'affectation has been added successfully.');
+
+                    // prepare validation data
+                    $valData = array(
+                        'ID_CLIENT' => $this->input->post('sessions'),
+                        'ID_PERSONNEL' => $this->session->user_id,
+                        'MESSAGE' => "Nouvelle Affectation Session",
+                        'DATE' => date('Y-m-d'),
+                        'VALIDE' => 0
+                    );
+                    // Insert in the validation table
+                    $validation = $this->Validation_model->insert($valData);
+                    
+                    if(!$validation){
+                        $data['error_msg'] = 'Operation non enregistree pour validation!'; 
+                    }
+
                     redirect('/affectation');
                 }else{
                     $data['error_msg'] = 'Some problems occurred, please try again.';
