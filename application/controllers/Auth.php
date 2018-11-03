@@ -47,7 +47,8 @@ class Auth extends CI_Controller
 				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
 
-			$this->data['title'] = 'Authentification';
+			//$this->data['title'] = 'Authentification';
+			$this->data['title'] = 'Users';
 
 			// Add header
 			$this->_render_page('templates' . DIRECTORY_SEPARATOR . 'header', $this->data);
@@ -458,6 +459,7 @@ class Auth extends CI_Controller
 	public function create_user()
 	{
 		$this->data['title'] = $this->lang->line('create_user_heading');
+		//$this->$data['title'] = 'Users';
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -560,6 +562,9 @@ class Auth extends CI_Controller
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 
+
+			// Add header
+			$this->_render_page('templates' . DIRECTORY_SEPARATOR . 'header', $this->data);
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $this->data);
 		}
 	}
@@ -580,7 +585,8 @@ class Auth extends CI_Controller
 	 */
 	public function edit_user($id)
 	{
-		$this->data['title'] = $this->lang->line('edit_user_heading');
+		//$this->data['title'] = $this->lang->line('edit_user_heading');
+		$this->data['title'] = 'Users';
 
 		if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id)))
 		{
@@ -719,7 +725,8 @@ class Auth extends CI_Controller
 	 */
 	public function create_group()
 	{
-		$this->data['title'] = $this->lang->line('create_group_title');
+		//$this->data['title'] = $this->lang->line('create_group_title');
+		$this->data['title'] = 'Users';
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -776,7 +783,8 @@ class Auth extends CI_Controller
 			redirect('auth', 'refresh');
 		}
 
-		$this->data['title'] = $this->lang->line('edit_group_title');
+		//$this->data['title'] = $this->lang->line('edit_group_title');
+		$this->data['title'] = 'Users';
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{

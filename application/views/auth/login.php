@@ -26,7 +26,10 @@
               <td><?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?></td>
             </tr>
             <tr>
-              <td><?php echo form_submit('submit', lang('login_submit_btn'));?></td>
+              <td><input type="submit" name="login_submit_btn" class="btn btn-primary" value="Login">
+                
+
+               
               <td><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></td>
             </tr>
           </tbody>

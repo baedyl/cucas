@@ -19,7 +19,38 @@ class Client_model extends CI_Model{
             return $query->result_array();
         }
     }
+     function getsessRows($id = ""){
+        if(!empty($id)){
+            $query = $this->db->get_where('SESSION', array('ID_CLIENT' => $id));
+            
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('SESSION');
+            return $query->result_array();
+        }
+    }
+    function getRowsbycin($cin = ""){
+        if(!empty($cin) ){
+           $query=$this->db->like('CIN_CLIENT',$cin);
+            $query = $this->db->get('CLIENT');
 
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('CLIENT');
+            return $query->row_array();
+        }
+    }
+
+    function gettradRows($id = ""){
+        if(!empty($id)){
+            $query = $this->db->get_where('TRADUCTION', array('ID_CLIENT' => $id));
+            
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('TRADUCTION');
+            return $query->result_array();
+        }
+    }
     /*
      * Insert post
      */

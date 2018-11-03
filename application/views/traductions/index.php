@@ -11,12 +11,35 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-default ">
+                <form class="navbar-form" action="<?php  echo site_url('traduction/searchbyetat'); ?>" method = "post">
+    <table>
+        <tr>
+            <td>
+                <font size="4" color="blue">Recherche par état : </font>
+            </td>
+                 
+            <td>
+    <div class="input-group" style="margin-left:10px;">
+        <select class="form-control" name = "keyword">
+            <option  value='payé'>payé</option>
+            <option value='non payé'>non payé</option>;
+        </select>
+        <div class="input-group-btn">
+            <input type="submit" name="postSubmit" class="btn btn-primary" value="Rechercher">
+
+        </div>
+         </td>
+        </tr>
+                </table>
+    </div>
+</form>
                 <div class="panel-heading">Traduction <a href="<?php echo site_url('traduction/add/'); ?>" class="glyphicon glyphicon-plus pull-right" ></a></div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th width="5%">ID Traduction</th>
-                            <th width="5%">ID Client</th>
+                            <th width="5%">Client</th>
+                            <th width="5%">User</th>
                             <th width="10%">Manuscrit traduit</th>
                             <th width="10%">Montant</th>  
                             <th width="10%">Paiement</th>
@@ -28,7 +51,26 @@
                         <?php if(!empty($traductions)): foreach($traductions as $traduction): ?>
                         <tr>
                             <td><?php echo '#'.$traduction['ID_TRADUCTION']; ?></td>
-                            <td><a href="<?php echo site_url('client/view/'.$traduction['ID_CLIENT']); ?>"><?php echo $traduction['ID_CLIENT']; ?></a></td>
+                            <td><a href="<?php echo site_url('client/view/'.$traduction['ID_CLIENT']); ?>">   
+                                <?php foreach($clients as $client): 
+                                    
+                                if($traduction['ID_CLIENT'] == $client['ID_CLIENT']){
+                                    echo $client['NOM_CLIENT'];
+                                }
+                                    
+                                ?>
+                                <?php endforeach; ?>
+                                    
+                                </a></td>
+                            <td><a href="<?php echo site_url('auth/view/'.$traduction['ID_USER']); ?>">
+                             <?php foreach($users as $user): 
+                                    
+                                if($traduction['ID_USER'] == $user['id']){
+                                    echo $user['last_name'];
+                                }
+                                    
+                                ?>
+                                <?php endforeach; ?></a></td>
                             <td><?php echo $traduction['TYPE_MANUS']; ?></td>
                             <td><?php echo $traduction['MONTANT']; ?></td>
                             <td><?php echo $traduction['PAIEMENT']; ?></td>

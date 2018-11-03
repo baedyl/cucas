@@ -2,8 +2,9 @@
 if ( !defined('BASEPATH')) exit('No direct script access allowed');
 class Traduction_model extends CI_Model{
     /*
-     * Get Traductions
+     * Get sessions
      */
+    
     function getRows($id = ""){
         if(!empty($id)){
             $query = $this->db->get_where('TRADUCTION', array('ID_TRADUCTION' => $id));
@@ -14,17 +15,27 @@ class Traduction_model extends CI_Model{
             return $query->result_array();
         }
     }
-
-    /*
-     * Get Traductions Where ID_CLIENT == $id
-     */
-    function getRowsByClient($id){
-        if(!empty($id)){
-            $query = $this->db->get_where('TRADUCTION', array('ID_CLIENT' => $id));
-			return $query->result_array();
+      function getRowsbyClient($idc = ""){
+        if(!empty($idc)){
+            $query = $this->db->get_where('TRADUCTION', array('ID_CLIENT' => $idc));
+            //var_dump($query);exit;
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('TRADUCTION');
+            return $query->result_array();
         }
     }
-    
+       function getRowsbyetat($ide = ""){
+        if(!empty($ide) ){
+           $query=$this->db->where('ETAT_TRAD',$ide);
+            $query = $this->db->get('TRADUCTION');
+
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('TRADUCTION');
+            return $query->row_array();
+        }
+    }
     /*
      * Insert Session
      */
@@ -36,7 +47,14 @@ class Traduction_model extends CI_Model{
             return false;
         }
     }
-    
+    /* public function aloctraduction($data = array()) {
+        $insert = $this->db->insert('AFFECT', $data);
+        if($insert){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
     /*
      * Update Session
      */

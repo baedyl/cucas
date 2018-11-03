@@ -1019,6 +1019,20 @@ class Ion_auth_model extends CI_Model
 	 * @return    bool
 	 * @author    Mathew
 	 */
+
+	// Retourne les informations d'un user
+	 function getUser($id = ""){
+        if(!empty($id)){
+            $query = $this->db->get_where('users', array('id' => $id));
+            //var_dump($query);exit;
+			return $query->row_array();
+        }else{
+            $query = $this->db->get('users');
+            return $query->result_array();
+        }
+    }
+	
+
 	public function login($identity, $password, $remember=FALSE)
 	{
 		$this->trigger_events('pre_login');

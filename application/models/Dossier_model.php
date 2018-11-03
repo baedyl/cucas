@@ -2,7 +2,7 @@
 if ( !defined('BASEPATH')) exit('No direct script access allowed');
 class Dossier_model extends CI_Model{
     /*
-     * Get dossiers
+     * Get sessions
      */
     function getRows($id = ""){
         if(!empty($id)){
@@ -14,21 +14,27 @@ class Dossier_model extends CI_Model{
             return $query->result_array();
         }
     }
-
-    /*
-     * Get dossiers by session's ID
-     */
-    function getRowsBySession($id = ""){
+     function getRowsBySession($id = ""){
         if(!empty($id)){
             $query = $this->db->get_where('DOSSIER', array('ID_SESSION' => $id));
-            //var_dump($query);exit;
-			return $query->result_array();
+            
+            return $query->result_array();
         }else{
             $query = $this->db->get('DOSSIER');
             return $query->result_array();
         }
     }
-    
+    function getRowsbyetat($etat = ""){
+        if(!empty($etat)){
+           $query=$this->db->where('ETAT_DOSSIER',$etat);
+            $query = $this->db->get('DOSSIER');
+
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('DOSSIER');
+            return $query->row_array();
+        }
+    }
     /*
      * Insert Session
      */
@@ -40,7 +46,14 @@ class Dossier_model extends CI_Model{
             return false;
         }
     }
-    
+      public function alocdoss($data = array()) {
+        $insert = $this->db->insert('AFFECT', $data);
+        if($insert){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
     /*
      * Update Session
      */

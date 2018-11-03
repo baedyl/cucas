@@ -3,10 +3,6 @@
         <div class="panel panel-default">
             <div class="panel-heading">Details Session<a href="<?php echo site_url('session/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
             <div class="panel-body">
-                <div>
-                    <a href="<?php echo site_url('visa/index/'.$session['ID_SESSION']); ?>" class="" >Visa</a>
-                    <a href="<?php echo site_url('dossier/index/'.$session['ID_SESSION']); ?>" class="" >Dossier</a>
-                </div>
                 <div class="form-group">
                     <label>Id Client:</label>
                     <p><?php echo !empty($session['ID_CLIENT'])?$session['ID_CLIENT']:''; ?></p>
@@ -35,6 +31,9 @@
                     <label>Etat Session:</label>
                     <p><?php echo !empty($session['ETAT_SESSION'])?$session['ETAT_SESSION']:''; ?></p>
                 </div>
+                      <a href="<?php echo site_url('visa/index/'.$session['ID_SESSION']); ?>">Visa</a>
+                    <a href="<?php echo site_url('dossier/index/'.$session['ID_SESSION']); ?>">Dossier</a>
+                <a href="<?php echo site_url('paiement/index/'.$session['ID_SESSION']); ?>">Paiements</a>
             </div>
         </div>
     </div>

@@ -6,11 +6,10 @@ class Client extends CI_Controller{
 
         parent::__construct();
         $this->load->helper('form');
+        $this->load->helper('email');
         $this->load->library('form_validation');
-
         $this->load->model('Client_model');
         $this->load->model('Validation_model');
-
         //$this->load->helper('url_helper');
 
         // Ion Auth
@@ -31,9 +30,10 @@ class Client extends CI_Controller{
                 $data['error_msg'] = $this->session->userdata('error_msg');
                 $this->session->unset_userdata('error_msg');
             }
-
+      
             $data['clients'] = $this->Client_model->getRows();
             $data['title'] = 'Clients';
+                        
 
             //load the list page view
             $this->load->view('templates/header', $data);
@@ -44,7 +44,91 @@ class Client extends CI_Controller{
             // redirect them to the login page
             redirect('auth/', 'refresh');
         }
-        
+        }
+  public function searchbycin($cin=""){
+        /* get messages from the session
+           Not sure this bloc is any useful...
+        */
+        if($this->ion_auth->logged_in()){
+            if($this->session->userdata('success_msg')){
+                $data['success_msg'] = $this->session->userdata('success_msg');
+                $this->session->unset_userdata('success_msg');
+            }
+            if($this->session->userdata('error_msg')){
+                $data['error_msg'] = $this->session->userdata('error_msg');
+                $this->session->unset_userdata('error_msg');
+            }
+      $cin=$this->input->post('keyword');
+            $data['clients'] = $this->Client_model->getRowsbycin($cin);
+            $data['title'] = 'Clients';
+                        
+
+            //load the list page view
+            $this->load->view('templates/header', $data);
+            $this->load->view('clients/index', $data);
+            $this->load->view('templates/footer');
+        }
+        else{
+            // redirect them to the login page
+            redirect('auth/', 'refresh');
+        }
+        }
+
+
+    public function tradview($id){
+        /* get messages from the session
+           Not sure this bloc is any useful...
+        */
+        if($this->ion_auth->logged_in()){
+            if($this->session->userdata('success_msg')){
+                $data['success_msg'] = $this->session->userdata('success_msg');
+                $this->session->unset_userdata('success_msg');
+            }
+            if($this->session->userdata('error_msg')){
+                $data['error_msg'] = $this->session->userdata('error_msg');
+                $this->session->unset_userdata('error_msg');
+            }
+
+            $data['traductions'] = $this->Client_model->gettradRows($id);
+            $data['title'] = 'Liste des traductions';
+           // var_dump($data['sessions']);exit;
+            //load the list page view
+            $this->load->view('templates/header', $data);
+            $this->load->view('clients/viewTrad', $data);
+            $this->load->view('templates/footer');
+        }
+        else{
+            // redirect them to the login page
+            redirect('auth/', 'refresh');
+        }
+    }
+
+    public function sessview($id){
+        /* get messages from the session
+           Not sure this bloc is any useful...
+        */
+        if($this->ion_auth->logged_in()){
+            if($this->session->userdata('success_msg')){
+                $data['success_msg'] = $this->session->userdata('success_msg');
+                $this->session->unset_userdata('success_msg');
+            }
+            if($this->session->userdata('error_msg')){
+                $data['error_msg'] = $this->session->userdata('error_msg');
+                $this->session->unset_userdata('error_msg');
+            }
+
+            $data['sessions'] = $this->Client_model->getsessRows($id);
+            $data['title'] = 'Liste des Sessions';
+           // var_dump($data['sessions']);exit;
+            //load the list page view
+            $this->load->view('templates/header', $data);
+            $this->load->view('clients/viewSession', $data);
+            $this->load->view('templates/footer');
+        }
+        else{
+            // redirect them to the login page
+            redirect('auth/', 'refresh');
+        }
     }
 
     public function view($id = NULL){
@@ -58,8 +142,9 @@ class Client extends CI_Controller{
         // verify if the product( produit ) id is not empty
         if(!empty($id)){
             $data['client'] = $this->Client_model->getRows($id);
-            $data['title'] = 'Clients';//$data['title'] = $data['client']['NOM_CLIENT'];
-            
+            //$data['title'] = $data['client']['NOM_CLIENT'];
+            $data['title'] = 'Clients';
+
             //load the details page view
             $this->load->view('templates/header', $data);
             $this->load->view('clients/view', $data);
@@ -69,6 +154,28 @@ class Client extends CI_Controller{
         }
     }
 
+    public function justview($id = NULL){
+        /*$data['produit'] = $this->produit_model->getProduit($name);
+
+        if(empty($data['produit'])){
+            show_404();
+        }*/
+        $data = array();
+
+        // verify if the product( produit ) id is not empty
+        if(!empty($id)){
+            $data['client'] = $this->Client_model->getRows($id);
+            //$data['title'] = $data['client']['NOM_CLIENT'];
+            $data['title'] = 'Clients';
+            
+            //load the details page view
+            $this->load->view('templates/header', $data);
+            $this->load->view('clients/justview', $data);
+            $this->load->view('templates/footer');
+        }else{
+            redirect('/client');
+        }
+    }
     /*
      * Add post content
      */
@@ -83,6 +190,7 @@ class Client extends CI_Controller{
             $this->form_validation->set_rules('nomClient', 'client NOM_CLIENT', 'required');
             $this->form_validation->set_rules('nat', 'client NATIONALITE', 'required');
             $this->form_validation->set_rules('naissance', 'client DATE_NAISSANCE', 'required');
+            $this->form_validation->set_rules('email', 'client EMAIL', 'required|valid_email');
             //$this->form_validation->set_rules('Image', 'produit Image', 'required');
             
             //var_dump($this->upload->data('file_name')) ;
@@ -94,37 +202,50 @@ class Client extends CI_Controller{
                 'NOM_CLIENT' => $this->input->post('nomClient'),
                 'NATIONALITE' => $this->input->post('nat'),
                 'DATE_NAISSANCE' => $this->input->post('naissance'),
+                'LIEU_NAISSANCE' => $this->input->post('lnaissance'),
+                'CIN_CLIENT' => $this->input->post('cin'),
+                'NOM_PERE' => $this->input->post('pere'),
+                'FCT_PERE' => $this->input->post('fctp'),
+                'TEL_PERE' => $this->input->post('telp'),
+                'NOM_MERE' => $this->input->post('mere'),
+                'FCT_MERE' => $this->input->post('fctm'),
+                'TEL_MERE' => $this->input->post('telm'),
+                'NUM_TEL' => $this->input->post('tel'),
+                'EMAIL' => $this->input->post('email'),
+                'ADR_CLIENT' => $this->input->post('adr'),
+                'NIVEAU_ETUDE' => $this->input->post('niv'),
+                'DOMAINE_ETUDE' => $this->input->post('dmn'),
+                'DERNIER_ETABLISEMENT' => $this->input->post('det'),
+                'CERTIF_ANGLAIS' => $this->input->post('crt'),
+                'PROGRAM' => $this->input->post('prg'),
+                'COMMENTAIRE' => $this->input->post('cmt'),
+                
                 //'Image' => $this->input->post('Image')
                 'IMAGE' => $file_name
             );
-
   
             //validate submitted form data
             if($this->form_validation->run() == true ){         
                 //insert post data
                 $insert = $this->Client_model->insert($postData);
-                //
-
-                
                 
                 if($insert){
                     $this->session->set_userdata('success_msg', 'Client has been added successfully.');
 
-
-                    // prepare validation data
+                    //prepare val data
                     $valData = array(
                         'ID_CLIENT' => $insert,
-                        'ID_PERSONNEL' => $this->session->user_id,
+                        'ID_PERSONNEL' => $_SESSION['user_id'],
                         'MESSAGE' => "Nouveau client ajoute",
                         'DATE' => date('Y-m-d'),
                         'VALIDE' => 0
                     );
-                    // Insert in the validation table
-                    $validation = $this->Validation_model->insert($valData);
-                    //var_dump($insert);exit;
-                    if(!$validation){
-                        $data['error_msg'] = 'Operation non enregistree pour validation!'; 
+                    if($this->Validation_model->insert($valData)){
+                        $this->session->set_userdata('success_msg', 'En attente de Validation.');
+                    }else{
+                        $data['error_msg'] = 'Some problems occurred for validation, please try again.';
                     }
+
                     redirect('/client');
                 }else{
                     $data['error_msg'] = 'Some problems occurred, please try again.';
@@ -135,7 +256,7 @@ class Client extends CI_Controller{
         }
         
         $data['client'] = $postData;
-        $data['title'] = 'Clients';//$data['title'] = 'Add Client';
+        $data['title'] = 'Clients';
         $data['action'] = 'Add';
         
         //load the add page view
@@ -150,6 +271,7 @@ class Client extends CI_Controller{
     public function edit($id){
         //echo "Hello\n";
         $data = array();
+        $valData = array();
         
         //get post data
         
@@ -177,6 +299,25 @@ class Client extends CI_Controller{
                 'NOM_CLIENT' => $this->input->post('nomClient'),
                 'NATIONALITE' => $this->input->post('nat'),
                 'DATE_NAISSANCE' => $this->input->post('naissance'),
+                'LIEU_NAISSANCE' => $this->input->post('lnaissance'),
+                'CIN_CLIENT' => $this->input->post('cin'),
+                'NOM_PERE' => $this->input->post('pere'),
+                'FCT_PERE' => $this->input->post('fctp'),
+                'TEL_PERE' => $this->input->post('telp'),
+                'NOM_MERE' => $this->input->post('mere'),
+                'FCT_MERE' => $this->input->post('fctm'),
+                'TEL_MERE' => $this->input->post('telm'),
+                'NUM_TEL' => $this->input->post('tel'),
+                'EMAIL' => $this->input->post('email'),
+                'ADR_CLIENT' => $this->input->post('adr'),
+                'NIVEAU_ETUDE' => $this->input->post('niv'),
+                'DOMAINE_ETUDE' => $this->input->post('dmn'),
+                'DERNIER_ETABLISEMENT' => $this->input->post('det'),
+                'CERTIF_ANGLAIS' => $this->input->post('crt'),
+                'PROGRAM' => $this->input->post('prg'),
+                'COMMENTAIRE' => $this->input->post('cmt'),
+                
+                //'Image' => $this->input->post('Image')
                 'IMAGE' => $file_name
             );
             
@@ -188,6 +329,21 @@ class Client extends CI_Controller{
                 
                 if($update){
                     $this->session->set_userdata('success_msg', 'Client has been updated successfully.');
+
+                    //prepare val data
+                    $valData = array(
+                        'ID_CLIENT' => $update,
+                        'ID_PERSONNEL' => $_SESSION['user_id'],
+                        'MESSAGE' => "Modification Client",
+                        'DATE' => date('Y-m-d'),
+                        'VALIDE' => 0
+                    );
+                    if($this->Validation_model->insert($valData)){
+                        $this->session->set_userdata('success_msg', 'En attente de Validation.');
+                    }else{
+                        $data['error_msg'] = 'Some problems occurred, please try again.';
+                    }
+
                     redirect('/client');
                 }else{
                     $data['error_msg'] = 'Some problems occurred, please try again.';
@@ -200,7 +356,7 @@ class Client extends CI_Controller{
         
         
         $data['client'] = $clientData;
-        $data['title'] = 'Clients';//$data['title'] = 'Update Client';
+        $data['title'] = 'Clients';
         $data['action'] = 'Edit';
         
         //load the edit page view
@@ -213,6 +369,11 @@ class Client extends CI_Controller{
      * Delete post data
      */
     public function delete($id){
+        if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
+        {
+            // redirect them to the home page because they must be an administrator to view this
+            return show_error('You must be an administrator to view this page.');
+        }
         //check whether post id is not empty
         if($id){
             //delete post
@@ -255,7 +416,7 @@ class Client extends CI_Controller{
 
 
     /* Gestion du Panier( cart ) */
-
+/*
     function add_to_cart(){ 
         $data = array(
             'id' => $this->input->post('id'), 
@@ -303,6 +464,6 @@ class Client extends CI_Controller{
         );
         $this->cart->update($data);
         echo $this->show_cart();
-    }
+    }*/
 }
 ?>

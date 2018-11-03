@@ -14,17 +14,32 @@ class Session_model extends CI_Model{
             return $query->result_array();
         }
     }
-
-    /*
-     * Get sessions by Client ID
-     */
-    function getRowsByClient($id){
-        if(!empty($id)){
-            $query = $this->db->get_where('SESSION', array('ID_CLIENT' => $id));
-			return $query->result_array();
+     function getRowsbyClient($idc = ""){
+        if(!empty($idc)){
+            $query = $this->db->get_where('SESSION', array('ID_CLIENT' => $idc));
+            //var_dump($query);exit;
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('SESSION');
+            return $query->result_array();
         }
     }
-    
+
+    function getRowsbyfin($fin = "", $typ = ""){
+
+        if(!empty($fin) )
+           $this->db->where('TYPE_FINANCE',$fin);
+        
+        if(!empty($typ)){
+          //   $this->db->like('TYPE_SESSION',$typ);
+             $this->db->where('TYPE_SESSION',$typ);
+        }
+             $query = $this->db->get('SESSION');
+            // var_dump($query);exit;
+              return $query->result_array();
+    }
+
+
     /*
      * Insert Session
      */
@@ -36,7 +51,22 @@ class Session_model extends CI_Model{
             return false;
         }
     }
-    
+     public function alocsess($data = array()) {
+        $insert = $this->db->insert('SESSION', $data);
+        if($insert){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }    
+   /*   public function alocvisa($data = array()) {
+        $insert = $this->db->insert('AFFECT', $data);
+        if($insert){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
     /*
      * Update Session
      */

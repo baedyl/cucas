@@ -33,9 +33,44 @@
                             </select>
                             <?php echo form_error('clients','<p class="help-block text-danger">','</p>'); ?>
                         </div>
+                         <div class="form-group">
+                       <!--     <label for="users">Id User</label>
+                            <!--input type="text" class="form-control" name="idClient" placeholder="Enter Id Client" value="<?php echo !empty($session['ID_CLIENT'])?$session['ID_CLIENT']:''; ?>"
+                            
+                            <select name="users" class="form-control">
+                                <?php foreach($users as $user): 
+                                    
+                                if($traduction['ID_USER'] == $user['ID_USER']){
+                                    echo "<option selected value='".$user['ID_USER']."'>".$user['FIRST_NAME']."</option>";
+                                }
+                                else{
+                                    echo "<option value='".$user['ID_USER']."'>".$user['ID_USER']."</option>";
+                                }
+                                    
+                                ?>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php echo form_error('users','<p class="help-block text-danger">','</p>'); ?>
+                        </div>-->
                         <div class="form-group">
                             <label for="manus">Manuscrit</label>
-                            <input type="text" class="form-control" name="manus" placeholder="Entrer Manuscrit" value="<?php echo !empty($traduction['TYPE_MANUS'])?$traduction['TYPE_MANUS']:''; ?>">
+                           <select name="manus" class="form-control">
+                             <?php  echo "<option selected value='".$traduction['TYPE_MANUS']."'>".$traduction['TYPE_MANUS']."</option>"?>
+                                <option  value='Diplôme Bac'>Diplôme Bac</option>
+                                <option value='Diplôme Licence'>Diplôme Licence</option>
+                                <option  value='Diplôme Master'>Diplôme Master</option>
+                                <option  value='Diplôme'>Diplôme</option>
+                                <option  value='Relevé Recap'>Relevé Recap</option>
+                                <option  value='Relevé'>Relevé</option>
+                                <option  value='Analyse'>Analyse</option>
+                                <option  value='Attestation'>Attestation</option>
+                                <option  value='Fiche anthropométrique'>Fiche anthropométrique</option>
+                                <option value='Certificat medical'>Certificat medical</option>";
+                                
+                                    
+                                ?>
+                               
+                            </select>
                             <?php echo form_error('manus','<p class="help-block text-danger">','</p>'); ?>
                         </div>
 
@@ -54,7 +89,13 @@
                         
                         <div class="form-group">
                             <label for="etat">Etat</label>
-                            <input type="text" class="form-control" name="etat" value="<?php echo !empty($traduction['ETAT_TRAD'])?$traduction['ETAT_TRAD']:''; ?>">
+                             <select name="etat" class="form-control">
+                             <?php  echo "<option selected value='".$traduction['ETAT_TRAD']."'>".$traduction['ETAT_TRAD']."</option>"?>
+                                  <option  value='payé'>payé</option>
+                                    <option value='non payé'>non payé</option>;
+                                ?>
+                               
+                            </select>
                             <?php echo form_error('etat','<p class="help-block text-danger">','</p>'); ?>
                         </div>
 

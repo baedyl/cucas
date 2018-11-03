@@ -33,7 +33,15 @@
                         </div>
                         <div class="form-group">
                             <label for="type">Type Session</label>
-                            <input type="text" class="form-control" name="type" placeholder="Enter Type Session" value="<?php echo !empty($session['TYPE_SESSION'])?$session['TYPE_SESSION']:''; ?>">
+                            <select name="type" class="form-control">
+                             <?php  echo "<option selected value='".$session['TYPE_SESSION']."'>".$session['TYPE_SESSION']."</option>"?>
+                                  <option  value='AUTUMN'>AUTUMN</option>
+                                    <option value='WINTER'>WINTER</option>";
+                                
+                                    
+                                ?>
+                               
+                            </select>
                             <?php echo form_error('type','<p class="help-block text-danger">','</p>'); ?>
                         </div>
                         <div class="form-group">
@@ -53,13 +61,29 @@
                         </div>
                         <div class="form-group">
                             <label for="finance">Type Financement</label>
-                            <input name="finance" class="form-control" placeholder="Enter finance" value="<?php echo !empty($session['TYPE_FINANCE'])?$session['TYPE_FINANCE']:''; ?>">
+                            <select name="finance" class="form-control">
+                             <?php  echo "<option selected value='".$session['TYPE_FINANCE']."'>".$session['TYPE_FINANCE']."</option>"?>
+                                  <option  value='self-sponsored'>self-sponsored</option>
+                                    <option value='scolarship'>scolarship</option>";
+                                
+                                    
+                                ?>
+                               
+                            </select>
                             <?php echo form_error('finance','<p class="text-danger">','</p>'); ?>
                         </div>
 
                         <div class="form-group">
                             <label for="etat">Etat Session</label>
-                            <input name="etat" class="form-control" placeholder="Enter etat" value="<?php echo !empty($session['ETAT_SESSION'])?$session['ETAT_SESSION']:''; ?>">
+                         <select name="etat" class="form-control">
+                             <?php  echo "<option selected value='".$session['ETAT_SESSION']."'>".$session['ETAT_SESSION']."</option>"?>
+                                  <option  value='en cours'>en cours</option>
+                                    <option value='cloturé'>cloturé</option>"
+                                    <option value='rejeté'>rejeté</option>";
+                                    
+                                ?>
+                               
+                            </select>
                             <?php echo form_error('etat','<p class="text-danger">','</p>'); ?>
                         </div>
 

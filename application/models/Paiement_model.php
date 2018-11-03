@@ -14,7 +14,27 @@ class Paiement_model extends CI_Model{
             return $query->result_array();
         }
     }
-    
+    function getRowsbySession($id = ""){
+        if(!empty($id)){
+            $query = $this->db->get_where('PAIEMENT', array('ID_SESSION' => $id));
+            //var_dump($query);exit;
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('PAIEMENT');
+            return $query->result_array();
+        }
+    }
+    function getRowsbyetat($etat = ""){
+        if(!empty($etat) ){
+           $query=$this->db->where('ETAT_PAIEMENT',$etat);
+            $query = $this->db->get('PAIEMENT');
+
+            return $query->result_array();
+        }else{
+            $query = $this->db->get('PAIEMENT');
+            return $query->row_array();
+        }
+    }
     /*
      * Insert Session
      */
@@ -26,7 +46,14 @@ class Paiement_model extends CI_Model{
             return false;
         }
     }
-    
+    public function alocpaiem($data = array()) {
+        $insert = $this->db->insert('AFFECT', $data);
+        if($insert){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+    }
     /*
      * Update Session
      */

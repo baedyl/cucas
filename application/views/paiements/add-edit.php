@@ -44,12 +44,28 @@
                         </div>
                         <div class="form-group">
                             <label for="mtd">Methode</label>
-                            <input type="text" class="form-control" name="mtd" placeholder="Enter Methode paiement" value="<?php echo !empty($paiement['METHOD_PAIEMENT'])?$paiement['METHOD_PAIEMENT']:''; ?>">
+                         <select name="mtd" class="form-control">
+                             <?php  echo "<option selected value='".$paiement['METHOD_PAIEMENT']."'>".$paiement['METHOD_PAIEMENT']."</option>"?>
+                                  <option  value='virement bancair'>virement bancaire</option>
+                                    <option value='espèce'>espèce</option>
+                                    <option value='chèque'>chèque</option>";
+                                    
+                                ?>
+                               
+                            </select>
                             <?php echo form_error('mtd','<p class="help-block text-danger">','</p>'); ?>
                         </div>
                         <div class="form-group">
                             <label for="etat">Etat</label>
-                            <input type="text" name="etat" class="form-control" placeholder="Enter Etat paiement" value="<?php echo !empty($paiement['ETAT_PAIEMENT'])?$paiement['ETAT_PAIEMENT']:''; ?>">
+                             <select name="etat" class="form-control">
+                             <?php  echo "<option selected value='".$paiement['ETAT_PAIEMENT']."'>".$paiement['ETAT_PAIEMENT']."</option>"?>
+                                  <option  value='reglé'>reglé</option>
+                                    <option value='non reglé'>non reglé</option>"
+                                    <option value='en cours'>en cours</option>";
+                                    
+                                ?>
+                               
+                            </select>
                             <?php echo form_error('etat','<p class="text-danger">','</p>'); ?>
                         </div>
 

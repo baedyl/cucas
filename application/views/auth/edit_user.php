@@ -1,7 +1,10 @@
+ <div class="panel-heading"><a href="<?php echo site_url('auth/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
+
 <h1><?php echo lang('edit_user_heading');?></h1>
 <p><?php echo lang('edit_user_subheading');?></p>
 
 <div id="infoMessage"><?php echo $message;?></div>
+
 
 <?php echo form_open(uri_string());?>
 

@@ -26,12 +26,26 @@
 								<?php endforeach?>
 							</td>
 							<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'));?></td>
-							<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit') ;?></td>
+							<td>
+								<?php echo anchor("auth/edit_user/".$user->id, 'Edit'); ?>
+								<?php echo anchor("auth/view/".$user->id, 'View'); ?>
+								
+							</td>
 						</tr>
 					<?php endforeach;?>
 				</table>
 
-				<p><?php echo anchor('auth/create_user', lang('index_create_user_link'))?> | <?php echo anchor('auth/create_group', lang('index_create_group_link'))?></p>
+					<!--<?php echo anchor('auth/create_user', lang('index_create_user_link'))?> | <?php echo anchor('auth/create_group', lang('index_create_group_link'))?>-->
+						
+				
+			</div>
+			<div>
+				<a href="create_user">
+					<input type="submit" name="index_create_user_link" class="btn btn-primary" value="Nouvel utilisateur"/>
+				</a>
+				<a href="create_group">
+					<input type="submit" name="index_create_group_link" class="btn btn-primary" value="Nouveau Groupe"/>
+				</a>
 			</div>
 		</div>
 	</div>

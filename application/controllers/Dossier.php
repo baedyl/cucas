@@ -12,13 +12,23 @@ class Dossier extends CI_Controller {
         // Load Models
         $this->load->model('Dossier_model');
         $this->load->model('Session_model');
+        $this->load->model('Validation_model');
 
         // Ion Auth
         $this->load->library('ion_auth');
     }
 
     // Liste de toutes les sessions
-    public function index($id = NULL){
+    public function index($ids = NULL){
+        $affectData = array();
+            $now = date('Y-m-d H:i:s');
+            //prepare post data
+            $postData = array(
+               'ID_USER' => $_SESSION['user_id'],
+                'ID_SESSION' => $ids,
+                'DATE' => $now,
+                'COMMENTAIRE' => 'DOSSIER'
+            );
         // Verify if the user is logged in
         if($this->ion_auth->logged_in()){
             $data = array();
@@ -32,18 +42,16 @@ class Dossier extends CI_Controller {
                 $data['error_msg'] = $this->session->userdata('error_msg');
                 $this->session->unset_userdata('error_msg');
             }
-
-            $data['title'] = 'Dossiers';
-            if(empty($id)){
+            if(empty($ids)){
                 $data['dossiers'] = $this->Dossier_model->getRows();
-                
+                $data['title'] = 'Dossiers';
             }else{
-                $data['dossiers'] = $this->Dossier_model->getRowsBySession($id);
-                //$data['title'] = 'Liste des dossiers de la session';
-
-            }  
+                $data['dossiers'] = $this->Dossier_model->getRowsBySession($ids);
+                $this->Dossier_model->alocdoss($postData);
+                $data['title'] = 'Dossiers';
+            }
             //var_dump($data['personnel']);exit;
-
+            $data['sessions'] = $this->Session_model->getRows();
             //load the list page view
             $this->load->view('templates/header', $data);
             $this->load->view('dossiers/index', $data);
@@ -55,6 +63,42 @@ class Dossier extends CI_Controller {
         
     }
     
+     public function searchbyetat($etat = NULL){
+        // Verify if the user is logged in
+        if($this->ion_auth->logged_in()){
+            $data = array();
+            
+            //get messages from the session
+            if($this->session->userdata('success_msg')){
+                $data['success_msg'] = $this->session->userdata('success_msg');
+                $this->session->unset_userdata('success_msg');
+            }
+            if($this->session->userdata('error_msg')){
+                $data['error_msg'] = $this->session->userdata('error_msg');
+                $this->session->unset_userdata('error_msg');
+            }
+            $etat=$this->input->post('keyword');
+            $atm=$this->input->post('Autumn');
+            $wtr=$this->input->post('Winter');
+            if(empty($etat)){
+                $data['dossiers'] = $this->Dossier_model->getRows();
+                $data['title'] = 'Dossiers';
+            }else{
+                $data['dossiers'] = $this->Dossier_model->getRowsbyetat($etat, $atm, $wtr);
+                $data['title'] = 'Dossiers';
+            }
+            //var_dump($data['personnel']);exit;
+            $data['sessions'] = $this->Session_model->getRows();
+            //load the list page view
+            $this->load->view('templates/header', $data);
+            $this->load->view('dossiers/index', $data);
+            $this->load->view('templates/footer');
+        }else{
+            // redirect them to the login page
+            redirect('auth/', 'refresh');
+        }
+        
+    }
     /*
      * Session details
      */
@@ -64,7 +108,8 @@ class Dossier extends CI_Controller {
         //check whether post id is not empty
         if(!empty($id)){
             $data['dossier'] = $this->Dossier_model->getRows($id);
-            $data['title'] = 'Dossiers';//$data['title'] = $data['dossier']['CONTRAT'];
+            //$data['title'] = $data['dossier']['CONTRAT'];
+            $data['title'] = 'Dossiers';
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -81,6 +126,7 @@ class Dossier extends CI_Controller {
     public function add(){
         $data = array();
         $postData = array();
+        $valData = array();
         
         //if add request is submitted
         if($this->input->post('postSubmit')){
@@ -128,7 +174,23 @@ class Dossier extends CI_Controller {
                 
                 if($insert){
                     $this->session->set_userdata('success_msg', 'Dossier has been added successfully.');
+
+                    //prepare val data
+                    $valData = array(
+                        'ID_CLIENT' => $insert,
+                        'ID_PERSONNEL' => $_SESSION['user_id'],
+                        'MESSAGE' => "Nouveau Dossier client",
+                        'DATE' => date('Y-m-d'),
+                        'VALIDE' => 0
+                    );
+                    if($this->Validation_model->insert($valData)){
+                        $this->session->set_userdata('success_msg', 'En attente de Validation.');
+                    }else{
+                        $data['error_msg'] = 'Some problems occurred, please try again.';
+                    }
+
                     redirect('/dossier');
+
 
                 }else{
                     $data['error_msg'] = 'Some problems occurred, please try again.';
@@ -137,7 +199,7 @@ class Dossier extends CI_Controller {
         }
         
         $data['dossier'] = $postData;
-        $data['title'] = 'Dossiers';//$data['title'] = 'Ajouter dossier';
+        $data['title'] = 'Dossiers';
         //$data['action'] = 'Add';
         $data['action'] = 'Ajouter';
 
@@ -159,6 +221,7 @@ class Dossier extends CI_Controller {
      */
     public function edit($id){
         $data = array();
+        $valData = array();
         
         //get post data
         
@@ -193,6 +256,8 @@ class Dossier extends CI_Controller {
             
             //prepare cms page data
             $postData = array(
+
+                'ID_SESSION' => $this->input->post('sessions'),
                 'CONTRAT' => $contrat,
                 'PASSEPORT' => $passport,
                 'BILLET' => $billet,
@@ -207,6 +272,21 @@ class Dossier extends CI_Controller {
                 
                 if($update){
                     $this->session->set_userdata('success_msg', 'Dossier has been modified successfully.');
+
+                    //prepare val data
+                    $valData = array(
+                        'ID_CLIENT' => $update,
+                        'ID_PERSONNEL' => $_SESSION['user_id'],
+                        'MESSAGE' => "Dossier client modifie",
+                        'DATE' => date('Y-m-d'),
+                        'VALIDE' => 0
+                    );
+                    if($this->Validation_model->insert($valData)){
+                        $this->session->set_userdata('success_msg', 'En attente de Validation.');
+                    }else{
+                        $data['error_msg'] = 'Some problems occurred, please try again.';
+                    }
+
                     redirect('/dossier');
                 }else{
                     $data['error_msg'] = 'Some problems occurred, please try again.';
@@ -216,7 +296,8 @@ class Dossier extends CI_Controller {
         
         
         $data['dossier'] = $dossierData;
-        $data['title'] = 'Dossiers';//$data['title'] = 'Modifier dossier';
+        //var_dump($data['dossier']);exit;
+        $data['title'] = 'Dossiers';
         $data['action'] = 'Edit';
         
         // List of clients to fill the combobox
@@ -232,6 +313,11 @@ class Dossier extends CI_Controller {
      * Delete post data
      */
     public function delete($id){
+        if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
+        {
+            // redirect them to the home page because they must be an administrator to view this
+            return show_error('You must be an administrator to view this page.');
+        }
         //check whether post id is not empty
         if($id){
             //delete post

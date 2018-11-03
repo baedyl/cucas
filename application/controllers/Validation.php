@@ -35,7 +35,7 @@ class Validation extends CI_Controller {
             }
             
             $data['validations'] = $this->Validation_model->getRows();
-            $data['title'] = 'Liste des validations';
+            $data['title'] = 'Validations';
             
             //load the list page view
             $this->load->view('templates/header', $data);
@@ -57,7 +57,8 @@ class Validation extends CI_Controller {
         //check whether post id is not empty
         if(!empty($id)){
             $data['validation'] = $this->Validation_model->getRows($id);
-            $data['title'] = $data['validation']['MESSAGE'];
+            //$data['title'] = $data['validation']['MESSAGE'];
+            $data['title'] = 'Validations';
             
             //load the details page view
             $this->load->view('templates/header', $data);
@@ -116,7 +117,7 @@ class Validation extends CI_Controller {
         }
         
         $data['validation'] = $postData;
-        $data['title'] = 'Ajouter validation';
+        $data['title'] = 'Validations';
         //$data['action'] = 'Add';
         $data['action'] = 'Ajouter';
 
@@ -184,7 +185,7 @@ class Validation extends CI_Controller {
         
         
         $data['validation'] = $valData;
-        $data['title'] = 'Modifier Validation';
+        $data['title'] = 'Validations';
         $data['action'] = 'Edit';
         
         // List of clients to fill the combobox

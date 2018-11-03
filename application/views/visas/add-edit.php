@@ -49,7 +49,16 @@
                         </div>
                         <div class="form-group">
                             <label for="etat">Etat visa</label>
-                            <input type="text" name="etat" class="form-control" placeholder="Enter Etat visa" value="<?php echo !empty($visa['ETAT_VISA'])?$visa['ETAT_VISA']:''; ?>">
+                             <select name="etat" class="form-control">
+                             <?php  echo "<option selected value='".$visa['ETAT_VISA']."'>".$visa['ETAT_VISA']."</option>"?>
+                                <option  value='accepted'>accepted</option>
+                                <option  value='delivered'>delivered</option>
+                                <option  value='not confirmed'>not confirmed</option>
+                                <option  value='not started'>not started</option>
+                                <option value='processing'>processing</option>";
+                                ?>
+                               
+                            </select>
                             <?php echo form_error('etat','<p class="text-danger">','</p>'); ?>
                         </div>
 

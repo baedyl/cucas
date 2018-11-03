@@ -39,9 +39,9 @@
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="client">Clients</a>
         </li>
-        <li class="sidebar-nav-item">
+       <!--  <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="personnel">Personnel</a>
-        </li>
+        </li>-->
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="session">Sessions</a>
         </li>
@@ -51,7 +51,7 @@
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="dossier">Dossiers</a>
         </li>
-        <li class="sidebar-nav-item">
+       <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="paiement">Paiements</a>
         </li>
         <li class="sidebar-nav-item">
@@ -69,12 +69,12 @@
     <!-- Header -->
     <header class="masthead d-flex">
       <div class="container text-center my-auto" style="margin: 250px;padding: 400px;">
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+      <!--  <a class="btn btn-primary btn-xl js-scroll-trigger" href="#">Find Out More</a> -->
       </div>
       <div class="overlay"></div>
     </header>
 
-    <!-- About -->
+    <!-- About 
     <section class="content-section bg-light" id="about">
       <div class="container text-center">
         <div class="row">
@@ -86,9 +86,9 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>-->
 
-    <!-- Services -->
+    <!-- Services 
     <section class="content-section bg-primary text-white text-center" id="services">
       <div class="container">
         <div class="content-section-heading">
@@ -137,6 +137,7 @@
         </div>
       </div>
     </section>
+    -->
 
     <!-- Callout -->
  <!--   <section class="callout">
@@ -152,59 +153,59 @@
     <section class="content-section" id="portfolio">
       <div class="container">
         <div class="content-section-heading text-center">
-          <h3 class="text-secondary mb-0">Portfolio</h3>
-          <h2 class="mb-5">Recent Projects</h2>
+          <h3 class="text-secondary mb-0">Cucas</h3>
+          <h2 class="mb-5">Votre Portail</h2>
         </div>
         <div class="row no-gutters">
           <div class="col-lg-6">
-            <a class="portfolio-item" href="#">
+            <a class="portfolio-item" href="client">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>Stationary</h2>
-                  <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
+                  <h2>Clients</h2>
+                  <p class="mb-0">Gestion des clients</p>
                 </span>
               </span>
               <img class="img-fluid" src="img/portfolio-1.jpg" alt="">
             </a>
           </div>
           <div class="col-lg-6">
-            <a class="portfolio-item" href="#">
+            <a class="portfolio-item" href="traduction">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>Ice Cream</h2>
-                  <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
+                  <h2>Traduction</h2>
+                  <p class="mb-0">Traitements des traductions.</p>
                 </span>
               </span>
               <img class="img-fluid" src="img/portfolio-2.jpg" alt="">
             </a>
           </div>
           <div class="col-lg-6">
-            <a class="portfolio-item" href="#">
+            <a class="portfolio-item" href="session">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>CUCAS</h2>
-                  <p class="mb-0">Studying in China never been easier !</p>
+                  <h2>Sessions</h2>
+                  <p class="mb-0">Etudier en Chine!</p>
                 </span>
               </span>
               <img class="img-fluid" src="img/china.svg" alt="">
             </a>
           </div>
           <div class="col-lg-6">
-            <a class="portfolio-item" href="#">
+            <a class="portfolio-item" href="paiement">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>Workspace</h2>
-                  <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
+                  <h2>Paiements</h2>
+                  <p class="mb-0">'Money doesn't grow on trees'</p>
                 </span>
               </span>
-              <img class="img-fluid" src="img/portfolio-4.jpg" alt="">
+              <img class="img-fluid" src="img/money.jpg" alt="">
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Call to Action -->
+    <!-- Call to Action
     <section class="content-section bg-primary text-white">
       <div class="container text-center">
         <h2 class="mb-4">The buttons below are impossible to resist...</h2>
@@ -212,8 +213,8 @@
         <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
       </div>
     </section>
-
-    <!-- Map -->
+    -->
+    <!-- Map 
     <section id="contact" class="map">
       <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
       <br/>
@@ -221,6 +222,7 @@
         <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
       </small>
     </section>
+     -->
 
     <!-- Footer -->
     <footer class="footer text-center">
@@ -242,7 +244,7 @@
             </a>
           </li>
         </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Your Website 2018</p>
+        <p class="text-muted small mb-0">Copyright &copy; Cucas 2018</p>
       </div>
     </footer>
 
